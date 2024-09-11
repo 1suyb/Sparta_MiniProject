@@ -10,6 +10,7 @@ public class SceneLoader : MonoBehaviour
 	public void SceneLoad(int sceneNumber)
 	{
 		if (sceneNumber == 1) { SoundManager.instance.GameStart(); }
+		Time.timeScale = 1.0f;
 		SceneManager.LoadScene(_scenes[sceneNumber]);
 	}
 

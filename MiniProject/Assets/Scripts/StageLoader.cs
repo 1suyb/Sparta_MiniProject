@@ -13,12 +13,17 @@ public class StageLoader : SceneLoader
 	public int Stage { get { return stage; } set { if (value < StageManager.Instance.StageCount) { stage = value; } } }
 
 	[SerializeField] private TextMeshProUGUI stageText;
-	private Animator animator;
+	[SerializeField] private Animator animator;
 	private void Start()
 	{
 		
 	}
 	public void MoveStage()
+	{
+		animator.Play("Click");
+		Invoke("move", 0.1f);
+	}
+	private void move()
 	{
 		StageManager.Instance.NowStage = Stage;
 		SoundManager.instance.MainStart();
@@ -32,19 +37,24 @@ public class StageLoader : SceneLoader
 
 		if (StageManager.Instance.ClearRecords[Stage] == 0)
 		{
-			if (Stage == 0) { this.gameObject.GetComponent<Image>().color = Color.green; }
+			if (Stage == 0) { animator.Play("Open"); }
 			else
 			{
 				if (StageManager.Instance.ClearRecords[Stage - 1] > 0)
 				{
-					this.gameObject.GetComponent<Image>().color = Color.green;
+					animator.Play("Open");
 				}
 				else
 				{
-					this.gameObject.GetComponent<Image>().color = Color.gray;
+					animator.SetBool("Closed", true);
 					this.gameObject.GetComponent<Button>().enabled = false;
 				}
 			}
+		}
+		else
+		{
+			animator.SetBool("Open", false);
+			animator.SetBool("Closed", false);
 		}
 	}
 	public void HiddenInit()
@@ -55,11 +65,18 @@ public class StageLoader : SceneLoader
 	}
 	public void OnMouseOver()
 	{
-		Debug.Log("over");
-		animator.SetBool("Hover", true);
+		if (!animator.GetBool("Closed"))
+		{
+			Debug.Log("over");
+			animator.SetBool("Hover", true);
+		}
+		
 	}
 	public void OnMouseExit()
 	{
-		animator.SetBool("Hover", false);
+		if (!animator.GetBool("Closed"))
+		{
+			animator.SetBool("Hover", false);
+		}
 	}
 }
