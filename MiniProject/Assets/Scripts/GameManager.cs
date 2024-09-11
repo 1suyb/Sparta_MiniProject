@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 			
 		else
 			Destroy(this.gameObject);
-		Time.timeScale = 1.0f;
+
 		isClear = false;
 	}
 
