@@ -13,8 +13,8 @@ public class UI_GameScene : UI_Scene
 		TimerText,
 	}
 
-	private TextMeshProUGUI _stageText;
-	private TextMeshProUGUI _timerText;
+	public TextMeshProUGUI StageText { get; private set; }
+	public TextMeshProUGUI TimerText { get; private set; }
 
 	private void Start()
 	{
@@ -26,8 +26,12 @@ public class UI_GameScene : UI_Scene
 		base.Init();
 		Bind<TextMeshProUGUI>(typeof(Texts));
 		GetText((int)Texts.StageLabel).text = "Stage";
-		_stageText = GetText((int)Texts.StageText);
+		StageText = GetText((int)Texts.StageText);
 		GetText((int)Texts.TimerLabel).text = "남은시간";
-		_timerText = GetText((int)Texts.TimerText);
+		TimerText = GetText((int)Texts.TimerText);
+	}
+	public void TimeWarningText()
+	{
+		TimerText.color = Color.red;
 	}
 }

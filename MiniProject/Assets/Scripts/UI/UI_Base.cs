@@ -36,6 +36,7 @@ public abstract class UI_Base : MonoBehaviour
 	protected TextMeshProUGUI GetText(int idx) { return Get<TextMeshProUGUI>(idx); }
 	protected Image GetImage(int idx) { return Get<Image>(idx); }
 	protected Button GetButton(int idx) { return Get<Button>(idx); }
+	protected GameObject GetGameObject(int idx) { return Get<GameObject>(idx); }
 
 	public static void BindEvent(GameObject go , Action<PointerEventData> action, UIEveneType type)
 	{
@@ -50,4 +51,5 @@ public abstract class UI_Base : MonoBehaviour
 				break;
 		}
 	}
+
 }

@@ -6,24 +6,5 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-	[SerializeField] private float totaltime = 30f;
-	[SerializeField] private TextMeshProUGUI timeText;
 
-	public float TotalTime {  get { return totaltime; } }
-	private bool changeMusic = false;
-
-	private void Update()
-	{
-		totaltime -= Time.deltaTime;
-		timeText.text = totaltime.ToString("N2");
-		if(totaltime < 10 && !changeMusic)
-		{
-			changeMusic = true;
-			timeText.color = Color.red;
-		}
-		if (totaltime <= 0)
-		{
-			GameManager.Instance.GameOver();
-		}
-	}
 }

@@ -8,21 +8,17 @@ using System.Linq;
 public class Board : MonoBehaviour
 {
 	[SerializeField] private GameObject card;
-	[SerializeField] private SpriteList sprites = new SpriteList();
+	[SerializeField] private List<Sprite> sprites = new List<Sprite>();
 
-	private void Start()
+	public void SetBoard()
 	{
-		SetBoard();
-	}
-	private void SetBoard()
-	{
-		sprites = StageManager.Instance.StageSprites;
-		GameManager.Instance.cardCount = sprites.list.Count;
+		sprites = Manager.Instance.StageM.Sprites;
+		sprites.AddRange(sprites);
+		int spriteCount = sprites.Count;
+		(int width, int height) = FindLargestPair(spriteCount);
 
-		int spritesCount = sprites.list.Count;
-		(int width, int height) = FindLargestPair(spritesCount);
-		List<Sprite> randomlist = sprites.list.OrderBy(x => UnityEngine.Random.Range(0, 7f)).ToList();
-		for (int i = 0; i < spritesCount; i++)
+		List<Sprite> randomlist = sprites.OrderBy(x => UnityEngine.Random.Range(0, (float)spriteCount)).ToList();
+		for (int i = 0; i < spriteCount; i++)
 		{
 			float x = (i % width) *1.4f + (2.3f-0.7f*(width-2));
 			float y = (i / width) * 1.4f + 1.0f;

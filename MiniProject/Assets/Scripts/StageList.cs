@@ -12,13 +12,13 @@ public class StageList : MonoBehaviour
 	}
 	public void Init()
 	{
-		for(int i = 0; i < StageManager.Instance.StageCount; i++) {
+/*		for(int i = 0; i < StageManager.Instance.StageCount; i++) {
 			GameObject go = Instantiate(stageButton,this.transform);
 			go.GetComponent<StageLoader>().Init(i);
 		}
 		if (PlayerPrefs.HasKey("hidden")){
 			GameObject go = Instantiate(stageButton,this.transform);
 			go.GetComponent<StageLoader>().HiddenInit();
-		}
+		}*/
 	}
 }

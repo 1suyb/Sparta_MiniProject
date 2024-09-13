@@ -14,24 +14,21 @@ public class Card : MonoBehaviour
 	[SerializeField] private GameObject back;
 	[SerializeField] private float wattingtime;
 
+	private CardGameLogic _logic;
+
 	private Animator anim;
 	private AudioSource audioSource;
 
 	private void Start()
 	{
 		anim = GetComponent<Animator>();
-		audioSource = GetComponent<AudioSource>();
-	}
-	public void Init(string name)
-	{
-		this.Name = name;
-		front.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(cardName);
 	}
 	public void Init(string name,float x, float y)
 	{
 		this.Name = name;
-		front.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(cardName);
+		front.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>($"Images/{cardName}");
 		this.transform.localPosition = new Vector2(x, y);
+		_logic = GameObject.Find("@Logic").GetComponent<CardGameLogic>();
 	}
 	public void OnMouseOver()
 	{
@@ -50,16 +47,8 @@ public class Card : MonoBehaviour
 	public void CardOpen()
 	{
 		anim.Play("Flip");
-		audioSource.Play();
-		if (GameManager.Instance.firstCard == null)
-		{
-			GameManager.Instance.firstCard = this;
-		}
-		else if(GameManager.Instance.secondCard == null)
-		{
-			GameManager.Instance.secondCard = this;
-			GameManager.Instance.MatchedCard();
-		}
+		Manager.Instance.SoundM.Play(Sounds.E_CardFlip);
+		_logic.MatchedCard(this);
 		front.SetActive(true);
 		back.SetActive(false);
 	}

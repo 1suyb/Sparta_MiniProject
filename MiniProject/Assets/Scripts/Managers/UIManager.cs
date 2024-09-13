@@ -9,9 +9,11 @@ public class UIManager
 
 	public UI_Popup ShowPopupUI(string path)
 	{
-		UI_Popup popup = Resources.Load<UI_Popup>(path);
+		GameObject popup = Resources.Load<GameObject>(path);
+		GameObject.Instantiate(popup.gameObject);
+		
 		canvasOrder++;
-		_popup.Push(popup);
+		_popup.Push(popup.GetComponent<UI_Popup>());
 		return null;
 	}
 
@@ -19,6 +21,7 @@ public class UIManager
 	{
 		if (_popup.Count == 0) { return; }
 		UI_Popup popup = _popup.Pop();
+		popup.Close();
 		canvasOrder--;
 		popup = null;
 		

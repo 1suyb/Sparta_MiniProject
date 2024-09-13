@@ -24,6 +24,6 @@ public class UI_StartScene : UI_Scene
 		Bind<TextMeshProUGUI>(typeof(Texts));
 		Bind<Button>(typeof(Buttons));
 
-		BindEvent(Get<Button>((int)Buttons.StartButton).gameObject,ButtonFunc.GoStageSelectScene,UIEveneType.Click);
+		BindEvent(Get<Button>((int)Buttons.StartButton).gameObject,LoadSceneButton.GoStageSelectScene,UIEveneType.Click);
 	}
 }

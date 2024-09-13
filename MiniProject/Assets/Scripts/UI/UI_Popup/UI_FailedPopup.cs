@@ -19,16 +19,17 @@ public class UI_FailedPopup : UI_Popup
 		StageSelect,
 	}
 
-	[SerializeField] AudioClip clip;
-
+	public void Start()
+	{
+		Init();
+	}
 	public override void Init()
 	{
 		base.Init();
-		Manager.Instance.SoundM.Play(clip);
 		Bind<TextMeshProUGUI>(typeof(Texts));
 		Bind<Button>(typeof(Buttons));
 
-		BindEvent(GetButton((int)Buttons.Retry).gameObject, ButtonFunc.RestartGame, UIEveneType.Click);
-		BindEvent(GetButton((int)Buttons.StageSelect).gameObject, ButtonFunc.GoStageSelectScene, UIEveneType.Click);
+		BindEvent(GetButton((int)Buttons.Retry).gameObject, LoadSceneButton.RestartGame, UIEveneType.Click);
+		BindEvent(GetButton((int)Buttons.StageSelect).gameObject, LoadSceneButton.GoStageSelectScene, UIEveneType.Click);
 	}
 }

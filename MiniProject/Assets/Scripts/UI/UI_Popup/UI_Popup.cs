@@ -12,6 +12,6 @@ public class UI_Popup : UI_Base
 	public virtual void Close()
 	{
 		Manager.Instance.UIM.ClosePopupUI();
-		Object.Destroy(this.gameObject);
+		Destroy(this.gameObject);
 	}
 }

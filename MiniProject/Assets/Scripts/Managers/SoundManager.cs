@@ -11,11 +11,24 @@ public enum SoundType
 	MaxCount,
 }
 
+public enum Sounds
+{
+	B_BackGroundMusic,
+	B_PlaygroundMusic,
+	B_WarningMusic,
+	E_CardFlip,
+	E_Match,
+	E_MissMatch,
+	E_Clear,
+	E_Failed,
+}
+
 public class SoundManager
 {
 	private readonly string _soundRoot = "@Sound";
 	private AudioSource[] _audioSource = new AudioSource[(int)SoundType.MaxCount];
 	private Dictionary<string, AudioClip> _audioCache = new Dictionary<string, AudioClip>();
+	public SoundData SoundData { get; private set; }
 
 	public void Init()
 	{
@@ -32,6 +45,38 @@ public class SoundManager
 				go.transform.parent = root.transform;
 			}
 			_audioSource[(int)SoundType.BGM].loop = true;
+			SoundData = Resources.Load<SoundData>("Data/SoundData");
+		}
+	}
+
+	public void Play(Sounds sound)
+	{
+		switch (sound)
+		{
+			case Sounds.B_BackGroundMusic:
+				Play(SoundData.B_BackGroundMusic, SoundType.BGM);
+				break;
+			case Sounds.B_PlaygroundMusic:
+				Play(SoundData.B_PlaygroundMusic, SoundType.BGM);
+				break;
+			case Sounds.B_WarningMusic:
+				Play(SoundData.B_WarningMusic, SoundType.BGM);
+				break;
+			case Sounds.E_CardFlip:
+				Play(SoundData.E_CardFlip);
+				break;
+			case Sounds.E_Match:
+				Play(SoundData.E_Match);
+				break;
+			case Sounds.E_MissMatch:
+				Play(SoundData.E_MissMatch);
+				break;
+			case Sounds.E_Clear:
+				Play(SoundData.E_Clear);
+				break;
+			case Sounds.E_Failed:
+				Play(SoundData.E_Clear);
+				break;
 		}
 	}
 
@@ -57,6 +102,11 @@ public class SoundManager
 			audioSource.clip = audioClip;
 			audioSource.Play();
 		}
+	}
+
+	public void Stop()
+	{
+		_audioSource[(int)SoundType.BGM].Stop();
 	}
 
 	public AudioClip TryGetClip(string path, SoundType type = SoundType.Effect)
