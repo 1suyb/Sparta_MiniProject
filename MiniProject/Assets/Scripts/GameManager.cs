@@ -7,10 +7,11 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance;
 	private void Awake()
 	{
-
+		
 		if (Instance == null)
 		{
 			Instance = this;
+			PlayerPrefs.DeleteAll();
 			DontDestroyOnLoad(this.gameObject);
 		}
 			
@@ -84,4 +85,9 @@ public class GameManager : MonoBehaviour
 		}
 	}
 	
+	public void GameStart()
+	{
+		SoundManager.instance.MainStart();
+		isClear = false;
+	}
 }
