@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class UI_Popup : UI_Base
 {
-	private Stack<UI_Popup> _popup = new Stack<UI_Popup>();
-
-	public void Init()
+	public override void Init()
 	{
+		Manager.Instance.UIM.SetCanvasOrder(this, true);
 	}
 
-	public void Push()
+	public virtual void Close()
 	{
-
+		Manager.Instance.UIM.ClosePopupUI();
+		Object.Destroy(this.gameObject);
 	}
-	public UI_Popup Pop() 
-	{
-		return null;
-	}
-
-
 }

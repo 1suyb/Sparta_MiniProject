@@ -19,7 +19,6 @@ public class Timer : MonoBehaviour
 		if(totaltime < 10 && !changeMusic)
 		{
 			changeMusic = true;
-			SoundManager.instance.NoManyTime();
 			timeText.color = Color.red;
 		}
 		if (totaltime <= 0)

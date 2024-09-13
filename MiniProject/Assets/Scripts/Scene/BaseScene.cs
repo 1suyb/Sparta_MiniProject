@@ -6,7 +6,7 @@ public class BaseScene : MonoBehaviour
 {
 	public SceneType SceneType {  get; private set; }
 
-	public void Init()
+	public virtual void Init()
 	{
 		
 	}

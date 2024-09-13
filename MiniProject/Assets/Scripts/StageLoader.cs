@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StageLoader : SceneLoader
+public class StageLoader : MonoBehaviour
 {
 	private int stage;
 	private bool isActive;
@@ -26,8 +26,6 @@ public class StageLoader : SceneLoader
 	private void move()
 	{
 		StageManager.Instance.NowStage = Stage;
-		SoundManager.instance.MainStart();
-		SceneManager.LoadScene(_scenes[2]);
 	}
 	public void Init(int stage)
 	{

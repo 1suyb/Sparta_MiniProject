@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
 			{
 				firstCard.RemoveCard();
 				secondCard.RemoveCard();
-				audiosource.PlayOneShot(SoundManager.instance.Matched);
 				cardCount -= 2;
 				if (cardCount == 0)
 				{
@@ -54,7 +53,6 @@ public class GameManager : MonoBehaviour
 			{
 				firstCard.CardClose();
 				secondCard.CardClose();
-				audiosource.PlayOneShot(SoundManager.instance.Mismatched);
 			}
 		}
 		firstCard = null;
@@ -65,8 +63,6 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = 0.0f;
 		if (isClear)
 		{
-			SoundManager.instance.GameClear();
-			UIManger.Instance.Clear();
 			StageManager.Instance.ClearStage();
 			if (StageManager.Instance.NowStage == 0)
 			{
@@ -79,8 +75,6 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			SoundManager.instance.GameFail();
-			UIManger.Instance.Fail();
 		}
 	}
 	

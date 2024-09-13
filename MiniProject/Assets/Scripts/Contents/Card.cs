@@ -21,7 +21,6 @@ public class Card : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		audioSource = GetComponent<AudioSource>();
-		audioSource.clip = SoundManager.instance.Cardflip;
 	}
 	public void Init(string name)
 	{
